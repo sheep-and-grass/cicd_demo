@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup CangJie SDK
+        run: |
+          # 请替换为实际的 CangJie SDK 下载地址
+          curl -fsSL https://example.com/cangjie-sdk-linux-x86_64.tar.gz | tar xz
+          echo "CANGJIE_HOME=$PWD/cangjie" >> $GITHUB_ENV
+          echo "$PWD/cangjie/bin" >> $GITHUB_PATH
+          echo "$PWD/cangjie/tools/bin" >> $GITHUB_PATH
+
+      - name: Build
+        run: cjpm build
+
+      - name: Test
+        run: cjpm test

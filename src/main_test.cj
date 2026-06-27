@@ -1,4 +1,4 @@
-package cicd_demo
+package cangjie_test_demo
 
 import std.unittest.*
 import std.unittest.testmacro.*
